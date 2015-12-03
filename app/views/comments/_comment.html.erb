@@ -1,0 +1,12 @@
+<div class="well" id="<%= dom_id(comment) %>">
+
+  <p><%= comment.body %></p>
+  Comment made by:
+  <p><%= comment.user.f_name %></p>
+
+<%= link_to "Delete", post_comment_path(@post, comment), {method: :delete,
+                                        class: "btn btn-danger",
+                                        data: {confirm: "Are you sure?"},
+                                        remote: true} %>
+  <hr>
+</div>

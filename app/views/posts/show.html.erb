@@ -1,0 +1,50 @@
+<h1>Show Blog</h1>
+
+
+
+<div class="well">
+
+<%= @post.title %>
+<br>
+<%= @post.blog %>
+<br>
+<br>
+<% if @post.tags.any? %>
+  Tagged with:
+  <% @post.tags.each do |tag| %>
+    <div class=“label label-primary”><%= tag.name%></div>
+  <%end%>
+<%end%>
+
+<!-- like or unlike POST -->
+<% if @like.present? && @like.persisted? %>
+  <%= link_to "Un-Favor", post_like_path(@post, @like), method: :delete %>
+<% else %>
+  <%= link_to "Favorite", post_likes_path(@post), method: :post %>
+<% end %>
+
+</div>
+<p>
+  <%= link_to "Edit", edit_show_path(@post), class: "btn btn-info btn-sm" %>
+  <%= link_to "Delete", post_path(@post), {method: :delete,
+                                          class: "btn btn-danger",
+                                          data: {confirm: "Are you sure?"}} %>
+</p>
+
+
+
+<h2>Add a comment</h2>
+
+<%= render "comments/form" %>
+
+
+
+
+
+<h2>Comments</h2>
+<div id="comments">
+
+<% @comments.each do |comment| %>
+<%= render "/comments/comment", comment: comment %>
+<% end %>
+</div>

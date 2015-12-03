@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+      <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+<li>Hello <%= current_user.f_name %>!</li>
+<li><%= link_to "Logout", sessions_path, method: :delete,
+                      data: {confirm: "Are you sure you wanna ditch?"}%></li>
+      <% else %>
+
+      <li><a href="<%= new_session_path %>">Login</a></li>
+      <li><a href="<%= new_user_path %>">Sign Up</a></li>
+      <% end %>
+  <li><a href="<%= posts_path %>">Homebase</a></li>
+
+  <li><a href="<%= new_post_path %>">New Post</a></li>
+
+
+  </ul>
+  </div>
+  </div>
+  </nav>
+<%= yield %>
+
+</body>
+</html>
